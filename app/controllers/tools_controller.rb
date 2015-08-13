@@ -89,7 +89,7 @@ class ToolsController < ApplicationController
       rescue
         next
       end
-      emails = contents.scan(/(\w{1,20}\b(@|\[at\]|<at>|\(at\))\b#{params[:domain].gsub('.', '\.')})/)
+      emails = contents.scan(/((\w|\.|\_|\-){1,20}\b(@|\[at\]|<at>|\(at\))\b#{params[:domain].gsub('.', '\.')})/)
       next if emails.empty?
       emails.each {|email| email_search.harvested_emails << HarvestedEmail.new(email: email, url: url)}
     end
